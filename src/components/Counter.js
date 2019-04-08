@@ -9,9 +9,6 @@ function isEven(value) {
 		return false;
 }
 
-// const promise = new Promise((resolve, reject) => {
-
-// })
 
 class Counter extends Component {
     incrementIfOdd = (props) => {
@@ -29,13 +26,10 @@ class Counter extends Component {
         // Stretch Problem: Implement an increment function that
         // increments after waiting for one second
         return new Promise((resolve, reject) => {
-            setTimeout(() => {
-                if (time === 1000) {
-                    resolve(this.props.increment(this.props.count))
-                } 
-            }, time);
+            setTimeout(() => {this.props.increment(this.props.count)},1000);
         })
     };
+
 
     render() {
         // Fill in the two button onClick methods
@@ -55,7 +49,7 @@ class Counter extends Component {
                 <button onClick={this.incrementIfOdd}>
                     Increment if odd
                 </button>
-                <button onClick={this.incrementAsync(1000)}>
+                <button onClick={this.incrementAsync}>
                     Increment async
                 </button> 
             </p>
