@@ -2,15 +2,39 @@ import React, { Component } from "react";
 import { connect } from 'react-redux';
 import { increment, decrement } from '../actions';
 
+function isEven(value) {
+	if (value%2 == 0)
+		return true;
+	else
+		return false;
+}
+
+// const promise = new Promise((resolve, reject) => {
+
+// })
+
 class Counter extends Component {
-    incrementIfOdd = () => {
+    incrementIfOdd = (props) => {
+        props.preventDefault;
         // Stretch Problem: Implement an increment function that
         // only increments if the counter value is odd
+        if (!isEven(this.props.count)) {
+            return this.props.increment(this.props.count)
+        } else {
+            return this.props.count
+        }
     };
 
-    incrementAsync = () => {
+    incrementAsync = (time) => {
         // Stretch Problem: Implement an increment function that
         // increments after waiting for one second
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                if (time === 1000) {
+                    resolve(this.props.increment(this.props.count))
+                } 
+            }, time);
+        })
     };
 
     render() {
@@ -20,20 +44,20 @@ class Counter extends Component {
         return (
             <p>
                 Clicked: {this.props.count} times
-                <button onClick={() => {/* Fill me in */ }}>
+                <button onClick={() => { this.props.increment(this.props.count) }}>
                     +
                 </button>
-                <button onClick={() => {/* Fill me in */ }}>
+                <button onClick={() => { this.props.decrement(this.props.count) }}>
                     -
                 </button>
                  {/* Uncomment these button tags if you got
                 around to implementing the extra credit functions */}
-                {/* <button onClick={this.incrementIfOdd}>
+                <button onClick={this.incrementIfOdd}>
                     Increment if odd
                 </button>
-                <button onClick={this.incrementAsync}>
+                <button onClick={this.incrementAsync(1000)}>
                     Increment async
-                </button>  */}
+                </button> 
             </p>
         );
     }
